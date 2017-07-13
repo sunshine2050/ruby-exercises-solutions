@@ -1,0 +1,17 @@
+
+1. For each of the files exercise_3_x.rb, read the instructions and write your solution inside the same file. DO NOT CHANGE THE DIRECTORY STRUCTURE or FILE NAMES
+
+2. In your github account, create a repo called RailsTut2015
+3. in the above repo create a new branch called exercise_3
+4. Push your solutions to the newly-created branch 
+
+
+checklist
+a. My master branch has no files
+b. When I switch to exercise_3 branch, I find exactly 6 files
+    exercise_3_1.rb
+    exercise_3_2.rb
+    exercise_3_3.rb
+    exercise_3_4.rb
+    Gemfile
+    Gemfile.lock
