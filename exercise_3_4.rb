@@ -14,6 +14,21 @@ yasmine=[60,90,95]
 # return value should be the hash.
 
 
+def order_grades(*param)
+  cnt={}
+  param.each do |student|
+    student.each do |grade|
+      if(cnt[grade]) 
+        cnt[grade]+=1
+      else 
+        cnt[grade]=1
+      end
+    end
+  end
+  
+  cnt
+end
+
 # This should work
 puts order_grades(ahmed,mohamed,yasmine)
 # This should work too
