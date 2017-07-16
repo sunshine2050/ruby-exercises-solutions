@@ -14,5 +14,29 @@
 
 
 class Document
+  
+	attr_accessor :author,:title,:content
+	def initialize(h = {})
+		h.each {|k,v| instance_variable_set("@#{k}",v)}
+	end
+
+	def +(b)
+	  return Document.new(author: @author, title: @title , content: @content + " " + b) if b.class == String
+	  Document.new(author: @author, title: @title , content: @content + " " + b.content)
+
+	end
+	
+	def words
+	  @content.split(' ')
+	end
+	
+	def each_word
+	  yield words
+	end
 end
 
+a=Document.new(:author => "someone", :title => "my book", :content => "this is the content of my book")
+b=Document.new(:author => "someone", :title => "my book", :content => "and so is this.")
+
+a.words
+b.each_word { |word| puts word }
