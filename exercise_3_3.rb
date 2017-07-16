@@ -1,3 +1,4 @@
+
 # Mixing in modules
 #[6] Create a method that returns today's date. Method name should be 'current_date'
 # This method should be in a module called 'Generic'.
@@ -19,11 +20,45 @@
 require 'time'
 
 module Generic
+   def current_date
+     time = Time.now.to_s
+     time = DateTime.parse(time).strftime("%Y/%m/%d")
+   end
    
+   def replace_word(old_word,new_word)
+     new_word
+   end
 end
-
 
 class Document
+    include Generic
+    attr_accessor :author,:title,:content
+    def initialize(h = {})
+    	h.each {|k,v| instance_variable_set("@#{k}",v)}
+    end
     
+    def title_with_date
+      @title + " " + current_date
+    end
+    
+    def +(b)
+      return Document.new(author: @author, title: @title , content: @content + " " + b) if b.class == String
+      Document.new(author: @author, title: @title , content: @content + " " + b.content)
+    
+    end
+    
+    def words
+      @content.split(' ')
+    end
+    
+    def each_word
+      yield words
+    end
+    def method_missing(func,new_str)
+      if(func[0..7]=="replace_") 
+        s=replace_word(func[8..func.length],new_str)
+      end 
+    end
 end
-
+a=Document.new(:author => "someone", :title => "my book", :content => "this is the content of my book")
+a.replace_book("Whatever")
