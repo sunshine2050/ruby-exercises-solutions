@@ -15,6 +15,16 @@
 
 
 class Document
+	attr_accessor :author,:title,:content
+	def initialize(h = {})
+		h.each {|k,v| instance_variable_set("@#{k}",v)}
+	end
+
+	def +(b)
+	  return Document.new(author: @author, title: @title , content: @content + " " + b) if b.class == String
+	  Document.new(author: @author, title: @title , content: @content + " " + b.content)
+
+	end
 end
 
 
