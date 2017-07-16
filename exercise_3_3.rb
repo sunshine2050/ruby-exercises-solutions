@@ -25,9 +25,7 @@ module Generic
      time = DateTime.parse(time).strftime("%Y/%m/%d")
    end
    
-   def replace_word(old_word,new_word)
-     new_word
-   end
+
 end
 
 class Document
@@ -46,7 +44,12 @@ class Document
       Document.new(author: @author, title: @title , content: @content + " " + b.content)
     
     end
-    
+
+   def replace_word(old_word,new_word)
+   		@content.sub! old_word, new_word
+   		Document.new(author: @author, title: @title, content: @content)
+   end   
+
     def words
       @content.split(' ')
     end
@@ -56,7 +59,7 @@ class Document
     end
     def method_missing(func,new_str)
       if(func[0..7]=="replace_") 
-        s=replace_word(func[8..func.length],new_str)
+        self.replace_word(func[8..func.length],new_str)
       end 
     end
 end
